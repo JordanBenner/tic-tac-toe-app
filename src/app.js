@@ -1,3 +1,5 @@
+import React from 'react';
+
 class Square extends React.Component {
   constructor() {
     super();
@@ -6,10 +8,15 @@ class Square extends React.Component {
     };
   }
 
+  clickedBox () {
+    console.log('Box', this.props.boxNum);
+    this.setState({value: 'X'});
+  }
+
   render() {
     return (
-      <button className="square" onClick={() => this.setState({value: 'X'})}>
-        {this.props.value}
+      <button className="square" onClick={() => this.clickedBox()}>
+        {this.state.value}
       </button>
     );
   }
@@ -18,7 +25,7 @@ class Square extends React.Component {
 
 class Board extends React.Component {
   renderSquare(i) {
-    return <Square/>
+    return <Square boxNum={i}/>
   }
 
   render() {
@@ -52,7 +59,8 @@ class Game extends React.Component {
     return (
       <div className='game'>
         <div className='game-board'>
-        <board/>
+          <Board/>
+        </div>
         <div className='game-info'>
           <div>{/*status*/}</div>
           <ol>{/*todo*/}</ol>
@@ -61,3 +69,5 @@ class Game extends React.Component {
     );
   }
 }
+
+export default Game
